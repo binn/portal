@@ -36,22 +36,22 @@ export const openbox = (env: NodeJS.ProcessEnv) => spawn('openbox', [], {
 
 export const chromium = (env: NodeJS.ProcessEnv, startupUrl) => {
     const config = [
-        '-bwsi',
-        '-test-type',
-        '-no-sandbox',
-        '-disable-gpu',
-        '-start-maximized',
-        '-force-dark-mode',
-        '-disable-file-system',
-        '-disable-software-rasterizer',
-    
-        `--display=${env.DISPLAY}`
+        '-browser',
+        '-no-remote',
+        '-safe-mode',
+        '-foreground',
+        '-new-instance',
+        '-private-window',
+
+        `-display=${env.DISPLAY}`,
+        `-new-window ${env.STARTUP_URL}`,
+        `-window-size ${env.VIDEO_WIDTH},${env.VIDEO_HEIGHT}`
     ]
 
     if(process.env.IS_CHROMIUM_DARK_MODE === 'false')
         config.splice(config.indexOf('-force-dark-mode'), 1)
 
-    return spawn('chromium', [
+    return spawn('firefox', [
         ...config,
         startupUrl
     ], {
