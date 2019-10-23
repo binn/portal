@@ -1,6 +1,9 @@
 FROM node:lts-buster
 
 # Install Chromium, audio and other misc packages including minimal runtime used for executing non GUI Java programs
+RUN echo "deb http://mozilla.debian.net/ jessie-backports firefox-release" > /etc/apt/sources.list
+RUN wget mozilla.debian.net/pkg-mozilla-archive-keyring_1.1_all.deb && dpkg -i pkg-mozilla-archive-keyring_1.1_all.deb
+
 RUN apt-get update && \
     apt-get -qqy --no-install-recommends -y install \
     dbus \
@@ -30,7 +33,8 @@ RUN apt-get update && \
     socat \
     grep \
     procps \
-    firefox
+    jessie-backports \
+    firefox 
 
 # Directory cleanup
 RUN mkdir -p /var/run/dbus
