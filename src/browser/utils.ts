@@ -37,14 +37,10 @@ export const openbox = (env: NodeJS.ProcessEnv) => spawn('openbox', [], {
 export const chromium = (env: NodeJS.ProcessEnv, startupUrl) => {
     const config = [
         '-browser',
-        '-no-remote',
-        '-safe-mode',
         '-foreground',
-        '-new-instance',
-        '-private-window',
 
         `-display=${env.DISPLAY}`,
-        `-new-window ${env.STARTUP_URL}`,
+        `-url ${env.STARTUP_URL}`,
         `-window-size ${env.VIDEO_WIDTH},${env.VIDEO_HEIGHT}`
     ]
 
