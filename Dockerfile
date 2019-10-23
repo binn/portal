@@ -30,7 +30,7 @@ RUN apt-get update && \
     socat \
     grep \
     procps \
-    chromium
+    firefox
 
 # Directory cleanup
 RUN mkdir -p /var/run/dbus
@@ -38,7 +38,7 @@ RUN rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 RUN rm -rf /home/glados
 
 # Chromium policies
-RUN mkdir -p /etc/chromium/policies/managed /etc/chromium/policies/recommended
+# RUN mkdir -p /etc/chromium/policies/managed /etc/chromium/policies/recommended
 
 # Add normal user
 RUN useradd glados --shell /bin/bash --create-home
@@ -55,7 +55,7 @@ RUN yarn && yarn build
 RUN rm -rf src
 
 # Chromium Policies
-COPY ./configs/chromium_policy.json /etc/chromium/policies/managed/policies.json
+# COPY ./configs/chromium_policy.json /etc/chromium/policies/managed/policies.json
 # Pulseaudio Configuration
 COPY ./configs/pulse_config.pa /tmp/pulse_config.pa
 
